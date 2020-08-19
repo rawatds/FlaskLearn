@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+
+{% block content %}
+<div id="main">
+  <h1 class="display-4">Welcome to My Blogs</h1>
+
+    {% if username %}
+      <h3>Hello {{ username }}</h3>
+    {% endif %}
+
+
+    {% for post in posts  %}
+        <h3 class="d-inline bg-primary text-white">{{ post.title}}</h3>
+    <br>
+        <p class="badge badge-info text-wrap"> By: {{post.author}} on {{post.date_posted}}</p>
+        <p class="text-success">{{ post.contents}} </p>
+    {% endfor %}
+
+    <hr>
+    <a href="login">Login</a> |
+    <a href="/about">About</a> |
+    <a href="test">Test</a>
+</div>
+
+{% endblock  %}
