@@ -1,4 +1,4 @@
-from blog import User, Post, db
+from blog.models import User, Post, db
 
 
 # Create the database
@@ -54,6 +54,10 @@ print(author, author.id)
 
 
 
+# Create the database
+#db.drop_all()
+# re-create
+#db.create_all()
 
 
 
