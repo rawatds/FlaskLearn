@@ -28,10 +28,12 @@ def create_app(config_class=Config):
     from blog.users.routes import users_bp
     from blog.posts.routes import posts_bp
     from blog.main.routes import main_bp
+    from blog.errors.handlers import errors_bp
 
     app.register_blueprint(users_bp)
     app.register_blueprint(posts_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(errors_bp)
 
     return app
 
