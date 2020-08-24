@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-import os
 
 # from blog.models import User, Post
 
@@ -34,10 +33,17 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'users_bp.login'
 login_manager.login_message_category = 'info'
 login_manager.login_message = 'To URL you are trying to access needs login first. Please login'
 # To avoid circular depedencies
 
-from blog import routes
-from blog.forms import RegistrationForm, LoginForm
+from blog.users.routes import users_bp
+from blog.posts.routes import posts_bp
+from blog.main.routes import main_bp
+
+app.register_blueprint(users_bp)
+app.register_blueprint(posts_bp)
+app.register_blueprint(main_bp)
+
+from blog.users.forms import RegistrationForm, LoginForm
