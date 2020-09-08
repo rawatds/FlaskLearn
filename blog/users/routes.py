@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request,session
 from blog import  bcrypt, db
 from blog.users.forms import LoginForm, RegistrationForm, UpdateAccountForm,  RequestResetForm, ResetPasswordForm
 from blog.models import User, Post
@@ -25,7 +25,7 @@ def register():
 
         flash(f'Account created for {form.username.data}! Pls login to continue.', 'success')
 
-        return redirect(url_for('userbp.login'))
+        return redirect(url_for('users_bp.login'))
     return render_template('register.html', title='Register', form=form)
 
 
@@ -41,6 +41,7 @@ def login():
             user = User.query.filter_by(email= form.email.data).first()
 
             if user and bcrypt.check_password_hash(user.password, form.password.data):
+                session['power-by'] = 'DSRDSRDSR'
                 login_user(user, remember=form.rememberme.data)
 
                 redir_url = request.args.get('next')
@@ -63,6 +64,8 @@ def login():
 @users_bp.route("/logout")
 def logout():
     logout_user()
+    session.clear()
+    session.delete()
     return redirect(url_for('main_bp.home'))
 
 

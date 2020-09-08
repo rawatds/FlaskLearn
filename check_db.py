@@ -2,8 +2,11 @@ from blog.models import User, Post, db
 import datetime #pytz
 from dateutil.tz import tzlocal
 
-#db.drop_all()
-#db.create_all()
+SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+
+
+db.drop_all()
+db.create_all()
 
 #Post.query.delete()
 #db.session.commit()

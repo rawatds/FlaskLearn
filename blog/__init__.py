@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from blog.config import Config
+import pymysql
 # from blog.models import User, Post
 
 mail = Mail()
@@ -18,7 +19,7 @@ login_manager.login_message = 'To URL you are trying to access needs login first
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     mail.init_app(app)
     db.init_app(app)
@@ -37,5 +38,6 @@ def create_app(config_class=Config):
 
     return app
 
+
 # To avoid circular depedencies
-#from blog.users.forms import RegistrationForm, LoginForm
+from blog.users.forms import RegistrationForm, LoginForm
